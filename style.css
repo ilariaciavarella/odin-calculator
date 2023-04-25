@@ -1,5 +1,5 @@
 * {
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Courier New', monospace;
 }
 
 body {
@@ -9,39 +9,49 @@ body {
     margin: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 #calc {
     background-color: #FDF0D5;
     box-sizing: border-box;
-    padding: 48px;
-    width: 600px;
-    height: 600px;
-    border-radius: 50px;
+    padding: 56px 32px 32px;
+    border-radius: 5px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 #display {
-    width: 100%;
-    height: 160px;
+    background-color: rgba(0,0,0, 50%);
+    border-radius: 3px;
+    display: flex;
+    padding: 12px 18px;
+    justify-content: flex-end;
+}
+
+#dispNum {
+    font-size: 72px;
+}
+
+#brand {
+    font-size: 14px;
+    text-align: center;
     margin-bottom: 48px;
-    background-color: #7ca1c4;
-    border-radius: 20px;
+    color: rgba(0,0,0, 50%)
 }
 
 #keys {
-    width: 100%;
     height: 296px;
-    border-radius: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     gap: 8px;
 }
 
 .rows {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     gap: 8px;
     height: 100%;
 }
@@ -49,9 +59,19 @@ body {
 button {
     background-color: #001E4A;
     color: white;
-    width: 100%;
     border-style: none;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: 200;
+    border-radius: 3px;
+    font-size: 20px;
+    width: 70px;
+    padding: 0;
+}
+
+.del {
+    font-size: 16px;
+    background-color: #7ca1c4;
+}
+
+.oper {
+    background-color: #c1121f;
+    font-size: 24px;
 }
