@@ -1,6 +1,6 @@
 // ELEMENTS
-let first = 0;
-let second = 0;
+let first = '';
+let second = '';
 let operator;
 let solution;
 
@@ -21,11 +21,7 @@ function divide (a, b) {
     if (b == 0) {
         return 'ERR';
     }
-    if (Number.isInteger(a/b)) {
-        return a / b;
-    } else {
-        return (a / b).toFixed(6);
-    }
+    return a / b;
 }
 
 function sqRoot (a) {
@@ -43,7 +39,7 @@ function percent(a) {
 function operate (x, y, operation) {
     switch (operation) {
         case 'add':
-            solution = add(x, y);
+            solution = addition(x, y);
             break;
         case 'subtr':
             solution = subtract(x, y);
@@ -67,16 +63,20 @@ function displayNumber(num) {
 
 // Select first number
 let counter = 0;
+let digitCounter = 0;
 const numbers = document.querySelectorAll('.num');
 
 numbers.forEach(number => number.addEventListener('click', (e) => {
     if (counter === 0) {
-        first = '';
-        first += e.target.textContent;
-        displayNumber(first);
-        opers.forEach(oper => oper.classList.remove('operClicked'));
+        digitCounter++
+        console.log(digitCounter);
+        if (digitCounter < 9) {
+            first += e.target.textContent;
+            displayNumber(first);
+            opers.forEach(oper => oper.classList.remove('operClicked'));
+        }
     }
-    console.log(counter);
+    //console.log(counter);
     console.log(first);
 }));
 
@@ -97,41 +97,49 @@ const div = document.querySelector('#div')
 //     console.log(operator);
 // }))
 
+opers.forEach(oper => oper.addEventListener('mousedown', (e) => {
+    e.target.classList.add('operClicked');
+}))
+
 add.addEventListener('click', (e) => {
+    digitCounter = 0;
     counter++;
     operator = e.target.id;
     opers.forEach(oper => oper.classList.remove('operClicked'));
-    e.target.classList.toggle('operClicked');
+    e.target.classList.add('operClicked');
 
     console.log(counter);
     console.log(operator);
 });
 
 subtr.addEventListener('click', (e) => {
+    digitCounter = 0;
     counter++;
     operator = e.target.id;
     opers.forEach(oper => oper.classList.remove('operClicked'));
-    e.target.classList.toggle('operClicked');
+    e.target.classList.add('operClicked');
 
     console.log(counter);
     console.log(operator);
 });
 
 mult.addEventListener('click', (e) => {
+    digitCounter = 0;
     counter++;
     operator = e.target.id;
     opers.forEach(oper => oper.classList.remove('operClicked'));
-    e.target.classList.toggle('operClicked');
+    e.target.classList.add('operClicked');
 
     console.log(counter);
     console.log(operator);
 });
 
 div.addEventListener('click', (e) => {
+    digitCounter = 0;
     counter++;
     operator = e.target.id;
     opers.forEach(oper => oper.classList.remove('operClicked'));
-    e.target.classList.toggle('operClicked');
+    e.target.classList.add('operClicked');
 
     console.log(counter);
     console.log(operator);
@@ -140,9 +148,11 @@ div.addEventListener('click', (e) => {
 // Select second number
 numbers.forEach(number => number.addEventListener('click', (e) => {
     if (counter !== 0) { 
-        second = '';
-        second += e.target.textContent;
-        displayNumber(second);
+        digitCounter++
+        if(digitCounter < 9) {
+            second += e.target.textContent;
+            displayNumber(second);
+        }
     }
     console.log(second);
 }));
@@ -153,7 +163,7 @@ equal.addEventListener('click', () => {
     counter = 0;
     operate(+first, +second, operator);
     console.log(solution);
-    dispNum.textContent = solution;
+    displayNumber(solution);
     opers.forEach(oper => oper.classList.remove('operClicked'));
 
     first = 0;
@@ -161,40 +171,93 @@ equal.addEventListener('click', () => {
 });
 
 
+// Numbers color transition
+numbers.forEach(number => number.addEventListener('mousedown', (e) => {
+    e.target.classList.add('numClicked');
+}));
+
+numbers.forEach(number => number.addEventListener('mouseup', (e) => {
+    e.target.classList.remove('numClicked');
+}));
+
+// Clear and delete
+const clear = document.querySelector('#clear');
+const del = document.querySelector('#del');
+
+clear.addEventListener('click', () => {
+    if (counter === 0) {
+        first = '';
+        console.log(first);
+        digitCounter = 0;
+        console.log(digitCounter);
+        displayNumber(0);
+    } else {
+        second = '';
+        displayNumber(0);
+    }
+})
+
+clear.addEventListener('mousedown', (e) => {
+    e.target.classList.add('operClicked');
+});
+clear.addEventListener('mouseup', (e) => {
+    e.target.classList.remove('operClicked');
+});
 
 
+del.addEventListener('click', () => {
+    if (counter === 0) {
+        first = first.slice(0, first.length - 1);
+        console.log(first);
+        console.log(digitCounter);
+        displayNumber(first);
+        digitCounter--;
+    } else {
+        second = second.slice(0, second.length - 1);
+        displayNumber(second);
+        digitCounter--;
+    }
+})
 
+del.addEventListener('mousedown', (e) => {
+    e.target.classList.add('operClicked');
+});
+del.addEventListener('mouseup', (e) => {
+    e.target.classList.remove('operClicked');
+});
 
 // Square root
 const sqrt = document.querySelector('#sqrt');
-sqrt.addEventListener('click', (e) => {
-    e.target.classList.add('operClicked');
+sqrt.addEventListener('click', () => {
     if (counter == 0) {
         solution = sqRoot(first);
         console.log(solution);
-        if (Number.isInteger(solution)) {
-            dispNum.textContent = solution;
-        } else {
-            dispNum.textContent = solution.toFixed(6);
-        }
+        displayNumber(solution);
     }
 
     counter = 0;
     first = '';
     second = '';
-})
+});
+
+sqrt.addEventListener('mouseup', (e) => {
+    e.target.classList.remove('operClicked');
+});
 
 // Percent
 const perc = document.querySelector('#perc');
-perc.addEventListener('click', (e) => {
-    e.target.classList.add('operClicked');
+perc.addEventListener('click', () => {
     if (counter == 0) {
         solution = percent(first);
         console.log(solution);
-        dispNum.textContent = solution.toFixed(6);
+        displayNumber(solution);
     }
 
     counter = 0;
     first = '';
     second = '';
-})
+});
+
+perc.addEventListener('mouseup', (e) => {
+    e.target.classList.remove('operClicked');
+});

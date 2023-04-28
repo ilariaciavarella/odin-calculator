@@ -15,7 +15,7 @@ body {
     background-color: #001E4A;
     box-sizing: border-box;
     padding: 56px 32px 32px;
-    border-radius: 5px;
+    border-radius: 20px;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -72,11 +72,15 @@ button {
     background-color: #E01522;
 }
 
-.operStyle {
+.oper {
     background-color: #E01522;
     font-size: 24px;
 }
 
 .operClicked {
     background-color: #F16A73;
+}
+
+.numClicked {
+    background-color: #A30000;
 }
