@@ -61,7 +61,7 @@ function displayNumber(num) {
     dispNum.textContent = num;
 }
 
-// Select first number
+// Select first and second number
 let counter = 0;
 const numbers = document.querySelectorAll('.num');
 const dot = document.querySelector('.dot');
@@ -74,9 +74,15 @@ numbers.forEach(number => number.addEventListener('click', (e) => {
             displayNumber(first);
             opers.forEach(oper => oper.classList.remove('operClicked'));
         }
+        console.log(first);
+    } else if (counter === 1) {
+        let secondDigits = second.length;
+        if (secondDigits < 8) {
+            second += e.target.textContent;
+            displayNumber(second);
+        }
+        console.log(second);
     }
-    //console.log(counter);
-    console.log(first);
 }));
 
 dot.addEventListener('click', (e) => {
@@ -87,8 +93,15 @@ dot.addEventListener('click', (e) => {
             displayNumber(first);
             opers.forEach(oper => oper.classList.remove('operClicked'));
         }
+    } else if (counter === 1) {
+        let secondDigits = second.length;
+        if (secondDigits < 8) {
+            second += e.target.textContent;
+            displayNumber(second);
+            opers.forEach(oper => oper.classList.remove('operClicked'));
+        }
     }
-}, {once: true})
+})
 
 // Select operator
 const opers = document.querySelectorAll('.oper');
@@ -142,29 +155,6 @@ div.addEventListener('click', (e) => {
     console.log(operator);
 });
 
-// Select second number
-numbers.forEach(number => number.addEventListener('click', (e) => {
-    if (counter === 1) { 
-        let secondDigits = second.length;
-        if(secondDigits < 8) {
-            second += e.target.textContent;
-            displayNumber(second);
-        }
-    }
-    console.log(second);
-}));
-
-dot.addEventListener('click', (e) => {
-    if (counter === 1) {
-        let secondDigits = second.length;
-        if (secondDigits < 8) {
-            second += e.target.textContent;
-            displayNumber(second);
-            opers.forEach(oper => oper.classList.remove('operClicked'));
-        }
-    }
-}, { once: true })
-
 // Do operation
 const equal = document.querySelector('#equal');
 equal.addEventListener('click', () => {
@@ -172,6 +162,7 @@ equal.addEventListener('click', () => {
     operate(+first, +second, operator);
     console.log(solution);
     displayNumber(solution);
+    
     // if (solution.toString().length > 8 && solution > 99999999) {
     //     displayNumber(solution.toExponential(2));
     // } else {
@@ -221,9 +212,15 @@ del.addEventListener('click', () => {
         first = first.slice(0, first.length - 1);
         console.log(first);
         displayNumber(first);
+        if (first.length < 1) {
+            displayNumber(0);
+        }
     } else {
         second = second.slice(0, second.length - 1);
         displayNumber(second);
+        if (second.length < 1) {
+            displayNumber(0);
+        }
     }
 })
 
