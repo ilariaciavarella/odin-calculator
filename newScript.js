@@ -75,6 +75,7 @@ numbers.forEach(number => number.addEventListener('click', (e) => {
             console.log(numTwo);
         }
     }
+    opers.forEach(oper => oper.classList.remove('operClicked'));
 }))
 
 // add dots
@@ -94,6 +95,7 @@ dot.addEventListener('click', (e) => {
             console.log(numTwo);
         }
     }
+    opers.forEach(oper => oper.classList.remove('operClicked'));
 })
 
 // select operator
@@ -171,7 +173,6 @@ clear.addEventListener('click', () => {
 del.addEventListener('click', () => {
     if (inputOne == true) {
         numOne = numOne.slice(0, numOne.length - 1);
-        console.log(numOne);
         displayNum(numOne);
         if (numOne.length < 1) {
             displayNum(0);
@@ -185,4 +186,25 @@ del.addEventListener('click', () => {
     }
 })
 
-// feedback visivi
+// visual feedback
+const otherOperFb = document.querySelectorAll('.feedback');
+
+opers.forEach(oper => oper.addEventListener('mousedown', (e) => {
+    e.target.classList.add('operClicked');
+}))
+
+numbers.forEach(number => number.addEventListener('mousedown', (e) => {
+    e.target.classList.add('numClicked');
+}));
+
+numbers.forEach(number => number.addEventListener('mouseup', (e) => {
+    e.target.classList.remove('numClicked');
+}));
+
+otherOperFb.forEach(feedback => feedback.addEventListener('mousedown', (e) => {
+    e.target.classList.add('operClicked');
+}))
+
+otherOperFb.forEach(feedback => feedback.addEventListener('mouseup', (e) => {
+    e.target.classList.remove('operClicked');
+}))
