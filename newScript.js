@@ -172,12 +172,14 @@ equal.addEventListener('click', () => {
         numTwo = '';
         operator = '';
         inputOne = true;
-    } else {
+    } else if (inputOne == true && numOne !== '') {
         displayNum(numOne);
         numOne = '';
         numTwo = '';
         operator = '';
         inputOne = true;
+    } else if (inputOne == true && numOne == '') {
+        return;
     }
 })
 
