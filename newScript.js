@@ -94,13 +94,13 @@ const dot = document.querySelector('.dot');
 
 dot.addEventListener('click', (e) => {
     if (inputOne == true) {
-        if (numOne.length < 8) {
+        if (numOne.length < 8 && !numOne.includes('.')) {
             numOne += e.target.textContent;
             displayNum(numOne);
             console.log(numOne);
         }
     } else {
-        if (numTwo.length < 8) {
+        if (numTwo.length < 8 && !numTwo.includes('.')) {
             numTwo += e.target.textContent;
             displayNum(numTwo);
             console.log(numTwo);
