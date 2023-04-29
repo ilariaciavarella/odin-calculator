@@ -30,20 +30,30 @@ function percent(a) {
 }
 
 function operate(oper, a, b) {
+    let sol;
     switch(oper) {
         case 'add':
-            return add(a, b);
+            sol = add(a, b);
             break;
         case 'subtr':
-            return subtr(a, b);
+            sol = subtr(a, b);
             break;
         case 'mult':
-            return mult(a, b);
+            sol = mult(a, b);
             break;
         case 'div':
-            return div(a, b);
+            sol = div(a, b);
             break;
     }
+
+    if (sol.toString().length > 8) {
+        if (sol > 99999) {
+            sol = sol.toExponential(2);
+        } else {
+            sol = sol.toString().slice(0, 8);
+        }
+    }
+    return sol;
 }
 
 // elements
@@ -53,6 +63,7 @@ let operator;
 
 //display numbers
 const dispNum = document.querySelector('#dispNum');
+
 function displayNum (num) {
     dispNum.textContent = num;
 }
@@ -122,6 +133,13 @@ const perc = document.querySelector('#perc');
 sqrt.addEventListener('click', () => {
     if (inputOne == true) {
         let solution = sqRoot(numOne);
+        if (solution.toString().length > 8) {
+            if (solution > 99999) {
+                solution = solution.toExponential(2);
+            } else {
+                solution = solution.toString().slice(0, 8);
+            }
+        }
         displayNum(solution);
         numOne = solution;
         numTwo = '';
@@ -131,6 +149,13 @@ sqrt.addEventListener('click', () => {
 perc.addEventListener('click', () => {
     if (inputOne == true) {
         let solution = percent(numOne);
+        if (solution.toString().length > 8) {
+            if (solution > 99999) {
+                solution = solution.toExponential(2);
+            } else {
+                solution = solution.toString().slice(0, 8);
+            }
+        }
         displayNum(solution);
         numOne = solution;
         numTwo = '';
@@ -208,3 +233,6 @@ otherOperFb.forEach(feedback => feedback.addEventListener('mousedown', (e) => {
 otherOperFb.forEach(feedback => feedback.addEventListener('mouseup', (e) => {
     e.target.classList.remove('operClicked');
 }))
+
+
+// Use keyboard
