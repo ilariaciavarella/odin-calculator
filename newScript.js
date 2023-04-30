@@ -89,6 +89,26 @@ numbers.forEach(number => number.addEventListener('click', (e) => {
     opers.forEach(oper => oper.classList.remove('operClicked'));
 }))
 
+document.addEventListener('keypress', (e) => {
+    let num = e.key;
+    if (num.match(/\d/g)) {
+        if (inputOne == true) {
+            if (numOne.length < 8) {
+                numOne += num;
+                displayNum(numOne);
+                console.log(numOne);
+            }
+        } else {
+            if (numTwo.length < 8) {
+                numTwo += num;
+                displayNum(numTwo);
+                console.log(numTwo);
+            }
+        }
+        opers.forEach(oper => oper.classList.remove('operClicked'));
+    }
+})
+
 // add dots
 const dot = document.querySelector('.dot');
 
@@ -109,6 +129,26 @@ dot.addEventListener('click', (e) => {
     opers.forEach(oper => oper.classList.remove('operClicked'));
 })
 
+document.addEventListener('keypress', (e) => {
+    let dot = e.key;
+    if (dot == '.') {
+        if (inputOne == true) {
+            if (numOne.length < 8 && !numOne.includes('.')) {
+                numOne += dot;
+                displayNum(numOne);
+                console.log(numOne);
+            }
+        } else {
+            if (numTwo.length < 8 && !numTwo.includes('.')) {
+                numTwo += dot;
+                displayNum(numTwo);
+                console.log(numTwo);
+            }
+        }
+        opers.forEach(oper => oper.classList.remove('operClicked'));
+    }
+})
+
 // select operator
 const opers = document.querySelectorAll('.oper');
 opers.forEach(oper => oper.addEventListener('click', (e) => {
@@ -125,6 +165,52 @@ opers.forEach(oper => oper.addEventListener('click', (e) => {
         console.log(operator);
     }
 }))
+
+document.addEventListener('keypress', (e) => {
+    let operKey = e.key;
+    if (operKey == '+' || operKey == '-' || operKey == '*' || operKey == '/') {
+        if (inputOne == true) {
+            switch (operKey) {
+                case '+':
+                    operator = 'add';
+                    break;
+                case '-':
+                    operator = 'subtr';
+                    break;
+                case '*':
+                    operator = 'mult';
+                    break;
+                case '/':
+                    operator = 'div';
+                    break;
+
+            }
+            console.log(operator);
+            inputOne = false;
+        } else {
+            let solution = operate(operator, +numOne, +numTwo);
+            displayNum(solution);
+            switch (operKey) {
+                case '+':
+                    operator = 'add';
+                    break;
+                case '-':
+                    operator = 'subtr';
+                    break;
+                case '*':
+                    operator = 'mult';
+                    break;
+                case '/':
+                    operator = 'div';
+                    break;
+
+            }
+            numOne = solution;
+            numTwo = '';
+            console.log(operator);
+        }
+    }
+})
 
 // one num operators
 const sqrt = document.querySelector('#sqrt');
@@ -162,6 +248,25 @@ perc.addEventListener('click', () => {
     }
 });
 
+document.addEventListener('keypress', (e) => {
+    let percKey = e.key;
+    if (percKey == '%') {
+        if (inputOne == true) {
+            let solution = percent(numOne);
+            if (solution.toString().length > 8) {
+                if (solution > 99999) {
+                    solution = solution.toExponential(2);
+                } else {
+                    solution = solution.toString().slice(0, 8);
+                }
+            }
+            displayNum(solution);
+            numOne = solution;
+            numTwo = '';
+        }
+    }
+})
+
 // do operation
 const equal = document.querySelector('#equal');
 
@@ -172,14 +277,23 @@ equal.addEventListener('click', () => {
         numTwo = '';
         operator = '';
         inputOne = true;
-    } else if (inputOne == true && numOne !== '') {
-        displayNum(numOne);
-        numOne = '';
-        numTwo = '';
-        operator = '';
-        inputOne = true;
-    } else if (inputOne == true && numOne == '') {
+    } else {
         return;
+    }
+})
+
+document.addEventListener('keypress', (e) => {
+    let eqKey = e.key;
+    if (eqKey == '=' || eqKey == 'Enter') {
+        if (inputOne == false) {
+            displayNum(operate(operator, +numOne, +numTwo));
+            numOne = '';
+            numTwo = '';
+            operator = '';
+            inputOne = true;
+        } else {
+            return;
+        }
     }
 })
 
@@ -196,6 +310,17 @@ clear.addEventListener('click', () => {
     displayNum(0);
 })
 
+document.addEventListener('keydown', (e) => {
+    let cancKey = e.key;
+    if (cancKey == 'Escape') {
+        numOne = '';
+        numTwo = '';
+        operator = '';
+        inputOne = true;
+        displayNum(0);
+    }
+})
+
 //delete
 del.addEventListener('click', () => {
     if (inputOne == true) {
@@ -209,6 +334,25 @@ del.addEventListener('click', () => {
         displayNum(numTwo);
         if (numTwo.length < 1) {
             displayNum(0);
+        }
+    }
+})
+
+document.addEventListener('keydown', (e) => {
+    let delKey = e.key;
+    if (delKey == 'Backspace') {
+        if (inputOne == true) {
+            numOne = numOne.slice(0, numOne.length - 1);
+            displayNum(numOne);
+            if (numOne.length < 1) {
+                displayNum(0);
+            }
+        } else {
+            numTwo = numTwo.slice(0, numTwo.length - 1);
+            displayNum(numTwo);
+            if (numTwo.length < 1) {
+                displayNum(0);
+            }
         }
     }
 })
