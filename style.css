@@ -3,7 +3,7 @@
 }
 
 body {
-    background-color: #FDF0D5;
+    background-color: #60405C;
     width: 100vw;
     height: 100vh;
     margin: 0;
@@ -12,10 +12,10 @@ body {
 }
 
 #calc {
-    background-color: #001E4A;
+    background-color: #EDE5EF;
     box-sizing: border-box;
     padding: 56px 32px 32px;
-    border-radius: 20px;
+    border-radius: 30px;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -23,7 +23,7 @@ body {
 }
 
 #display {
-    background-color: rgba(255,255,255, 50%);
+    background-color: #1C111B;
     border-radius: 3px;
     display: flex;
     padding: 12px 18px;
@@ -33,13 +33,14 @@ body {
 #dispNum {
     font-size: 72px;
     letter-spacing: -1px;
+    color: #EDE5EF;
 }
 
 #brand {
     font-size: 14px;
     text-align: center;
     margin-bottom: 48px;
-    color: rgba(255,255,255, 50%)
+    color: #1C111B;
 }
 
 #keys {
@@ -58,7 +59,7 @@ body {
 }
 
 button {
-    background-color: #7A0000;
+    background-color: #321E30;
     color: white;
     border-style: none;
     border-radius: 3px;
@@ -69,18 +70,18 @@ button {
 
 .delStyle {
     font-size: 16px;
-    background-color: #E01522;
+    background-color: #70587C;
 }
 
 .operStyle {
-    background-color: #E01522;
+    background-color: #70587C;
     font-size: 24px;
 }
 
 .operClicked {
-    background-color: #F16A73;
+    background-color: #4B3B54;
 }
 
 .numClicked {
-    background-color: #A30000;
+    background-color: #1A0F18;
 }

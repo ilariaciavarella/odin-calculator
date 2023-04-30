@@ -359,10 +359,38 @@ document.addEventListener('keydown', (e) => {
 
 // visual feedback
 const otherOperFb = document.querySelectorAll('.feedback');
+const addBtn = document.querySelector('#add');
+const subtrBtn = document.querySelector('#subtr');
+const multBtn = document.querySelector('#mult');
+const divBtn = document.querySelector('#div');
 
-opers.forEach(oper => oper.addEventListener('mousedown', (e) => {
+addBtn.addEventListener('mousedown', (e) => {
     e.target.classList.add('operClicked');
-}))
+    subtrBtn.classList.remove('operClicked');
+    multBtn.classList.remove('operClicked');
+    divBtn.classList.remove('operClicked');
+})
+
+subtrBtn.addEventListener('mousedown', (e) => {
+    e.target.classList.add('operClicked');
+    addBtn.classList.remove('operClicked');
+    multBtn.classList.remove('operClicked');
+    divBtn.classList.remove('operClicked');
+})
+
+multBtn.addEventListener('mousedown', (e) => {
+    e.target.classList.add('operClicked');
+    subtrBtn.classList.remove('operClicked');
+    addBtn.classList.remove('operClicked');
+    divBtn.classList.remove('operClicked');
+})
+
+divBtn.addEventListener('mousedown', (e) => {
+    e.target.classList.add('operClicked');
+    subtrBtn.classList.remove('operClicked');
+    multBtn.classList.remove('operClicked');
+    addBtn.classList.remove('operClicked');
+})
 
 numbers.forEach(number => number.addEventListener('mousedown', (e) => {
     e.target.classList.add('numClicked');
@@ -372,6 +400,14 @@ numbers.forEach(number => number.addEventListener('mouseup', (e) => {
     e.target.classList.remove('numClicked');
 }));
 
+dot.addEventListener('mousedown', (e) => {
+    e.target.classList.add('numClicked');
+})
+
+dot.addEventListener('mouseup', (e) => {
+    e.target.classList.remove('numClicked');
+})
+
 otherOperFb.forEach(feedback => feedback.addEventListener('mousedown', (e) => {
     e.target.classList.add('operClicked');
 }))
@@ -379,6 +415,3 @@ otherOperFb.forEach(feedback => feedback.addEventListener('mousedown', (e) => {
 otherOperFb.forEach(feedback => feedback.addEventListener('mouseup', (e) => {
     e.target.classList.remove('operClicked');
 }))
-
-
-// Use keyboard
